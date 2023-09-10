@@ -1,4 +1,6 @@
-﻿@model LeaveManage.web.Data.LeaveType
+﻿@*@model LeaveManage.web.Data.LeaveType*@
+
+@model LeaveTypeVM
 
 @{
     ViewData["Title"] = "Create";
@@ -22,7 +24,7 @@
                 <input asp-for="Default_Day" class="form-control" />
                 <span asp-validation-for="Default_Day" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="DateCreated" class="control-label"></label>
                 <input asp-for="DateCreated" class="form-control" />
                 <span asp-validation-for="DateCreated" class="text-danger"></span>
@@ -31,7 +33,7 @@
                 <label asp-for="DateModified" class="control-label"></label>
                 <input asp-for="DateModified" class="form-control" />
                 <span asp-validation-for="DateModified" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
