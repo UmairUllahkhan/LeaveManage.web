@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LeaveManage.web.Data;
 using AutoMapper;
 using LeaveManage.web.Models;
+using System.Drawing;
 
 namespace LeaveManage.web.Controllers
 {
@@ -44,8 +45,8 @@ namespace LeaveManage.web.Controllers
             {
                 return NotFound();
             }
-
-            return View(leaveType);
+            var leavetypeVM = mapper.Map<LeaveTypeVM>(leaveType);
+            return View(leavetypeVM);
         }
 
         // GET: LeaveTypes/Create
@@ -98,7 +99,9 @@ namespace LeaveManage.web.Controllers
             {
                 return NotFound();
             }
-            return View(leaveType);
+
+            var leavetypeVM = mapper.Map<LeaveTypeVM>(leaveType);
+            return View(leavetypeVM);
         }
 
         // POST: LeaveTypes/Edit/5
@@ -106,9 +109,42 @@ namespace LeaveManage.web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Leave_Name,Default_Day,Id,DateCreated,DateModified")] LeaveType leaveType)
+
+        #region Comment by umair ullah
+        //public async Task<IActionResult> Edit(int id, [Bind("Leave_Name,Default_Day,Id,DateCreated,DateModified")] LeaveType leaveType)
+        //{
+        //    if (id != leaveType.Id)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(leaveType);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!LeaveTypeExists(leaveType.Id))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(leaveType);
+        //}
+        #endregion
+
+        public async Task<IActionResult> Edit(int id, LeaveTypeVM leaveTypeVM)
         {
-            if (id != leaveType.Id)
+            if (id != leaveTypeVM.Id)
             {
                 return NotFound();
             }
@@ -117,12 +153,13 @@ namespace LeaveManage.web.Controllers
             {
                 try
                 {
+                    var leaveType = mapper.Map<LeaveType>(leaveTypeVM);
                     _context.Update(leaveType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LeaveTypeExists(leaveType.Id))
+                    if (!LeaveTypeExists(leaveTypeVM.Id))
                     {
                         return NotFound();
                     }
@@ -133,7 +170,7 @@ namespace LeaveManage.web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(leaveType);
+            return View(leaveTypeVM);
         }
 
         // GET: LeaveTypes/Delete/5
