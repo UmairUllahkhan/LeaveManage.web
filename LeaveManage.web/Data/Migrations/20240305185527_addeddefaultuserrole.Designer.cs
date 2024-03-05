@@ -4,6 +4,7 @@ using LeaveManage.web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveManage.web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240305185527_addeddefaultuserrole")]
+    partial class addeddefaultuserrole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,37 +108,33 @@ namespace LeaveManage.web.Data.Migrations
                         {
                             Id = "d8421d01-3dc0-4374-be9c-11c79d47efea",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "24298c02-b8c2-40d6-9c1f-686b90766e3d",
+                            ConcurrencyStamp = "1c6f3ed1-7e85-4f78-b5de-b49880552fd6",
                             DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "khoula007@hotmail.com",
                             EmailConfirmed = false,
                             JoiningDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LockoutEnabled = false,
                             NormalizedEmail = "KHOULA007@HOTMAIL.COM",
-                            NormalizedUserName = "KHOULA007@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEALGWEQcE02WL6YBVdL2Q0CUQ9YLjgBHG6c3QA2Kpc8IKSKxpDr+ISBnviW4u92xOA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOZAQH6H57PDkuybkeikP3oIJhUTK5cZN+Is7yQdrhlGoa/MP1kABnRBybRPgLkbOA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4bfd30bf-81f8-4710-bbd4-1aa6f9aef5da",
-                            TwoFactorEnabled = false,
-                            UserName = "khoula007@hotmail.com"
+                            SecurityStamp = "901672ae-36b3-417a-847f-1860bccc3cc7",
+                            TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "fa369996-9584-46c0-899b-a1992078c015",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c0073442-5b7e-4395-b6f8-d7eba0282373",
+                            ConcurrencyStamp = "bb473e7d-820b-4ebe-b1f1-a17b70cf5ac2",
                             DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "khoula009@hotmail.com",
                             EmailConfirmed = false,
                             JoiningDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LockoutEnabled = false,
                             NormalizedEmail = "KHOULA009@HOTMAIL.COM",
-                            NormalizedUserName = "KHOULA009@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF1iZF6jqxulCV6LhHv/vtZwGR2aN8Qe8dSpfnq4emACfHLCkPz3noFPhmZKU4O0Jw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOAmbOcvPrwL7x/wgvqAMQYgJEEBLrW7/YXGAW2zPbbHonr94eMP/+6GQHaP52X3Sw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4af3a5ea-2aeb-43cc-92b8-a874636f55de",
-                            TwoFactorEnabled = false,
-                            UserName = "khoula009@hotmail.com"
+                            SecurityStamp = "fc3cc2f9-90cf-4c2e-b291-5e36b257670b",
+                            TwoFactorEnabled = false
                         });
                 });
 
@@ -226,14 +224,14 @@ namespace LeaveManage.web.Data.Migrations
                         new
                         {
                             Id = "u8421m01-3dc0-0313-be9c-11c79d47mair",
-                            ConcurrencyStamp = "ac5cc70c-e7ed-43dc-90d7-85f155536c9c",
+                            ConcurrencyStamp = "701002ea-b6c4-44d4-bd04-83f03cee08fe",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "z8421u01-3dc0-0306-be9c-11c79d47bair",
-                            ConcurrencyStamp = "211fdec8-201b-490a-b8a0-116483739d8a",
+                            ConcurrencyStamp = "c0d20180-02a5-470c-a072-d522ebf53aeb",
                             Name = "User",
                             NormalizedName = "USER"
                         });
