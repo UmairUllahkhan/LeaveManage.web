@@ -12,10 +12,12 @@ using System.Drawing;
 using LeaveManage.web.Repository;
 using LeaveManage.web.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using LeaveManage.web.Constant;
 
 namespace LeaveManage.web.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = Roles.Administrator)]
+    
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeRepository _leaveTypeRepository;
