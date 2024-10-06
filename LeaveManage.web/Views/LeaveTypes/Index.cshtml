@@ -43,6 +43,7 @@
                 @Html.DisplayFor(modelItem => item.DateModified)
             </td>*@
             <td>
+                    <button data-id="@item.Id" class="btn btn-primary allocatebtn" type="button">Allocate Leave</button>
                     <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pencil"></i></a> |
                     <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info"></i></a> |
                     <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash"></i></a>
@@ -55,6 +56,10 @@
 
 <form id="deleteform" asp-action="Delete">
     <input type="hidden" id="leavetypeid" name="Id" />
+</form>
+
+<form id="allocateform" asp-action="AllocateLeave">
+    <input type="hidden" id="leavetypeidAllocate" name="Id" />
 </form>
 
 @section Scripts{
@@ -85,6 +90,25 @@
 
             });
 
+            $('.allocatebtn').click(function (e) {
+                swal({
+                    title: "Are you sure?",
+                    text: "Are you sure you want to Allocate to all employee",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((confirm) => {
+
+                    if (confirm) {
+                        var btn = $(this);
+                        var id = btn.data("id")
+                        //alert("Selected record deleted....");
+                        $('#leavetypeidAllocate').val(id);
+                        $('#allocateform').submit();
+                    }
+                });
+
+            });
 
 
         });

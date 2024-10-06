@@ -9,6 +9,7 @@ namespace LeaveManage.web.Application_Configrations
         public AutoMapperConfig()
         {
             CreateMap<LeaveType, LeaveTypeVM>().ReverseMap();
+            CreateMap<Employee, EmployeeListVM>().ReverseMap();
         }
 
 

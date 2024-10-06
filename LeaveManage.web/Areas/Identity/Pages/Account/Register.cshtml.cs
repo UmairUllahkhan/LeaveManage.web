@@ -31,13 +31,15 @@ namespace LeaveManage.web.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<Employee> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
         public RegisterModel(
             UserManager<Employee> userManager,
             IUserStore<Employee> userStore,
             SignInManager<Employee> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IWebHostEnvironment hostEnvironment )
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -45,6 +47,7 @@ namespace LeaveManage.web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _hostEnvironment = hostEnvironment;
         }
 
         /// <summary>
@@ -135,8 +138,17 @@ namespace LeaveManage.web.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //calling the email template
+
+                    var emailtemplate = Path.Combine(_hostEnvironment.WebRootPath, "templates", "email_template.html");
+
+                    var template = await System.IO.File.ReadAllTextAsync(emailtemplate);
+
+                    var message = template.Replace("{MessageContent}", 
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.")
+                        .Replace("{UserName}", $"{user.FirstName}");
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",message
+                        );
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

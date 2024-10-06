@@ -12,7 +12,9 @@ namespace LeaveManage.web.Data
         public LeaveType Type { get; set; }
         public int TypeId { get; set; }
 
-        public int EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
+
+        public int Period { get; set; }
 
  
 

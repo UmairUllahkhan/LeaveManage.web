@@ -23,12 +23,19 @@ namespace LeaveManage.web.Controllers
         private readonly ILeaveTypeRepository _leaveTypeRepository;
         //private readonly ApplicationDbContext _context;
         private readonly IMapper mapper;
+        private readonly ILeaveAllocationRepository _leaveAllocationRepository;
+        private readonly ILogger<LeaveTypesController> _logger;
 
-        public LeaveTypesController(ILeaveTypeRepository leaveTypeRepository,IMapper mapper)
+        public LeaveTypesController(ILeaveTypeRepository leaveTypeRepository,
+            IMapper mapper,
+            ILeaveAllocationRepository leaveAllocationRepository,
+            ILogger<LeaveTypesController> logger)
         {
             //_context = context;
             _leaveTypeRepository = leaveTypeRepository;
             this.mapper = mapper;
+            _leaveAllocationRepository = leaveAllocationRepository;
+            _logger = logger;
         }
 
         // GET: LeaveTypes
@@ -43,6 +50,7 @@ namespace LeaveManage.web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            _logger.LogInformation("Seri Log is Working");
             var aa = await Task.WhenAll(_leaveTypeRepository.GetAllAsync());
 
 
@@ -264,5 +272,11 @@ namespace LeaveManage.web.Controllers
         //{
         //  return (_context.LeaveTypes?.Any(e => e.Id == id)).GetValueOrDefault();
         //}
+
+        public async Task<IActionResult> AllocateLeave(int id)
+        {
+            await _leaveAllocationRepository.LeaveAllocation(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
